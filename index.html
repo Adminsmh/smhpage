@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://www.sammh.com/js/jquery.js"></script>
+    <script src="smh.page.js"></script>
+    <style>
+        #result{width: 500px;height: 100px; background: black;}
+        #result:hover{background: red}
+        .active{color: red}
+        #page{
+            margin: 20px;
+        }
+        #page span{border:1px solid #ccc;padding:10px;cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div id="page">
+    </div>
+</body>
+<script type="text/javascript">
+var option={
+    dom:"page",//渲染html层的ID
+    page:1,//初始化页数
+    command:7,//显示页数
+    pagecount:15,//总页数，需要你读取后台数据绑定
+    callback:function(api){
+        //回调函数，一般为请求后台数据接口
+        var current = api.GetIndex();//获取当前页
+        $.getJSON("xxx.php",{page:current},function(data){
+            //绑定数据操作                
+        })
+        
+    }
+}
+var render =new loading(option);//实例化分页函数
+render.Init();//调用启动函数
+</script>
+</html>
