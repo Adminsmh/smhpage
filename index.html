@@ -23,7 +23,6 @@
 </body>
 <script type="text/javascript">
 var option={
-    dom:"page",//渲染html层的ID
     page:1,//初始化页数
     command:7,//显示页数
     pagecount:15,//总页数，需要你读取后台数据绑定
@@ -36,7 +35,6 @@ var option={
         
     }
 }
-var render =new loading(option);//实例化分页函数
-render.Init();//调用启动函数
+$("#page").smhpage(option);
 </script>
 </html>

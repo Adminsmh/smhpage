@@ -1,4 +1,11 @@
-function loading(obj){
+(function(){
+        $.fn.smhpage=function(option){
+        var render = new loading(this,option);
+        //console.log(option);
+        render.Init();
+    };
+})()
+function loading(element,obj){
     this.Init=function(){
         this.filling(obj.page);
         this.eventBind();
@@ -8,6 +15,7 @@ function loading(obj){
     }
     this.filling=function(index,t){
         var command=obj.command;
+        var $dom = $(element);
         obj.page=parseInt(index);
         var start;
         var end;
@@ -47,17 +55,19 @@ function loading(obj){
             }
             html+="<span class=\""+active+"\" data-page=\""+start+"\">"+start+"</span>";
         }
-        $("#"+obj.dom).empty().html(prev+html+next);
+
+        $dom.empty().html(prev+html+next);
+        this.eventBind=function(){
+            var that = this;
+            var index = 1;
+            $dom.off().on('click','span',function(){
+                index=$(this).data('page');
+                var t = $(this).attr("class");
+                console.log(t);
+                that.filling(index,t);
+                obj.callback(that);
+            })
+        }
     }
-    this.eventBind=function(){
-        var that = this;
-        var index = 1;
-        $("#"+obj.dom).off().on('click','span',function(){
-            index=$(this).data('page');
-            var t = $(this).attr("class");
-            console.log(t);
-            that.filling(index,t);
-            obj.callback(that);
-        })
-    }
+
 }
